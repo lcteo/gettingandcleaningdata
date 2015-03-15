@@ -77,11 +77,11 @@ Additional vectors obtained by averaging the signals in a signal window sample.
 
 These are used on the angle() variable:
 
-gravityMean
-tBodyAccMean
-tBodyAccJerkMean
-tBodyGyroMean
-tBodyGyroJerkMean
+* gravityMean
+* tBodyAccMean
+* tBodyAccJerkMean
+* tBodyGyroMean
+* tBodyGyroJerkMean
 
 ## Data
 
@@ -102,30 +102,30 @@ The dataset includes the following files:
 The following files are available for the train and test data. Their descriptions are equivalent. 
 
 * 'train/subject_train.txt': 
-  Each row identifies the subject who performed the activity for each window sample. 
-  Its range is from 1 to 30. 
+  - Each row identifies the subject who performed the activity for each window sample. 
+  - Its range is from 1 to 30. 
 
 ## Transformations
 
 * Merges the training and the test sets to create one data set.
-  Create the final training set by merging y_train, subject_train, and x_train
-  Create the final test set by merging the x_test, y_test and subject_test data
-  Combine training and test data to create a final data set
+  - Create the final training set by merging y_train, subject_train, and x_train
+  - Create the final test set by merging the x_test, y_test and subject_test data
+  - Combine training and test data to create a final data set
 
 * Extracts only the measurements on the mean and standard deviation for each measurement.
-  Create a logical vector that contains TRUE values for the ID, mean() & stddev()
-  Subset final data table based on the logical vector to keep only desired columns 
+  - Create a logical vector that contains TRUE values for the ID, mean() & stddev()
+  - Subset final data table based on the logical vector to keep only desired columns 
 
 * Uses descriptive activity names to name the activities in the data set
-  Merge the final data set with the acitivity label table to include descriptive activity names
-  Updating the final data column name vector to include the new column names after merge
+  - Merge the final data set with the acitivity label table to include descriptive activity names
+  - Updating the final data column name vector to include the new column names after merge
 
 * Appropriately labels the data set with descriptive variable names.
-  Cleaning up the variable names
-  Reassigning the new descriptive column names to the final data set 
+  - Cleaning up the variable names
+  - Reassigning the new descriptive column names to the final data set 
 
 * Creates a second, independent tidy data set with the average of each variable for each activity and each subject.
-  Create a new table without the activity label column
-  Summarizing the table to include just the mean of each variable for each activity and each subject
-  Merging the subject average data with activity label to include descriptive acitvity names
-  Export the tidyData set 
+  - Create a new table without the activity label column
+  - Summarizing the table to include just the mean of each variable for each activity and each subject
+  - Merging the subject average data with activity label to include descriptive acitvity names
+  - Export the tidyData set 
