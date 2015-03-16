@@ -73,16 +73,6 @@ The set of variables that were estimated from these signals are:
 * mean(): Mean value
 * std(): Standard deviation
 
-Additional vectors obtained by averaging the signals in a signal window sample. 
-
-These are used on the angle() variable:
-
-* gravityMean
-* tBodyAccMean
-* tBodyAccJerkMean
-* tBodyGyroMean
-* tBodyGyroJerkMean
-
 ## Data
 
 The dataset includes the following files:
@@ -103,7 +93,9 @@ The following files are available for the train and test data. Their description
 
 * 'train/subject_train.txt': 
   - Each row identifies the subject who performed the activity for each window sample. 
-  - Its range is from 1 to 30. 
+  - Its range is from 1 to 30.
+
+The project outcome will be an independent tidy data set with the average of each variable for each activity and each subject. 
 
 ## Transformations
 

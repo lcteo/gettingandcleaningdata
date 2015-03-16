@@ -82,24 +82,27 @@ testdata <- cbind(y_test, subject_test, x_test)
 # 1. Merges the training and the test sets to create one data set.
 
 # Combine training and test data to create a final data set
-finaldata <- rbind(trainingdata, testdata)
+combinedata <- rbind(trainingdata, testdata)
+# write.table(combinedata, './traintestdata.csv', row.names=FALSE, sep=',')
 
 # Create a vector for the column names from the final data, which will be used
 # to select the desired mean() & stddev() columns
-fdcolnames <- colnames(finaldata)
+cdcolnames <- colnames(combinedata)
 
 # 2. Extracts only the measurements on the mean and standard deviation for each measurement.
 
 # Create a logical vector that contains TRUE values for the ID, mean() & stddev() columns and FALSE for others
-sensor_data_mean_std <- (grepl("activity..", fdcolnames) | grepl("subject..", fdcolnames) | grepl("-mean..", fdcolnames) & !grepl("-meanFreq..", fdcolnames) & !grepl("mean..-", fdcolnames) | grepl("-std..", fdcolnames) & !grepl("-std()..-", fdcolnames))
+data_mean_std <- (grepl("activityId", cdcolnames) | grepl("subjectId", cdcolnames) | grepl("mean", cdcolnames) | grepl("std", cdcolnames))
 
-# Subset final data table based on the logical vector to keep only desired columns
-finaldata <- finaldata[sensor_data_mean_std == TRUE]
+# Subset combine data table based on the logical vector to keep only desired columns
+desiredata <- combinedata[data_mean_std == TRUE]
+# write.table(desiredata, './meanstddata.csv', row.names=FALSE, sep=',')
 
 # 3. Uses descriptive activity names to name the activities in the data set
 
 # Merge the final data set with the acitivity label table to include descriptive activity names
-finaldata <- merge(finaldata, activity_labels, by='activityId', all.x=TRUE)
+finaldata <- merge(desiredata, activity_labels, by='activityId', all.x=TRUE)
+# write.table(finaldata, './datawlabel.csv', row.names=FALSE, sep=',')
 
 # Updating the final data column name vector to include the new column names after merge
 fdcolnames <- colnames(finaldata)
@@ -138,4 +141,6 @@ subjectavgdata <- aggregate(fdnoactlabel[, names(fdnoactlabel) != c('activityId'
 subjectavgdata <- merge(subjectavgdata, activity_labels, by='activityId', all.x=TRUE)
 
 # Export the tidyData set 
-write.table(subjectavgdata, './subjectavgdata.csv', row.names=TRUE, sep=',')
+write.table(subjectavgdata, './subjectavgdata.csv', row.names=FALSE, sep=',')
+write.table(subjectavgdata, './subjectavgdata.txt', row.names=FALSE, sep='\t')
+

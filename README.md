@@ -27,6 +27,8 @@ A script run_analyss.R has been created that does the following.
 * Appropriately labels the data set with descriptive variable names. 
 * Creates a second, independent tidy data set with the average of each variable for each activity and each subject.
 
+The project outcome will be an independent tidy data set with the average of each variable for each activity and each subject.
+
 The dataset used in this project is referenced from :
 
 [1] Davide Anguita, Alessandro Ghio, Luca Oneto, Xavier Parra and Jorge L. Reyes-Ortiz. Human Activity Recognition on Smartphones 
