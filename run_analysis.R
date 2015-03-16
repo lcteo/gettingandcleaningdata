@@ -24,6 +24,8 @@
 # Clean up workspace
 rm(list=ls())
 
+library(dplyr)
+
 # Downloading the file in the data folder
 if(!file.exists("./data")){dir.create("./data")}
 fileUrl <- "https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR%20Dataset.zip"
@@ -135,10 +137,18 @@ colnames(finaldata) = fdcolnames;
 fdnoactlabel  = finaldata[,names(finaldata) != 'activityLabel']
 
 # Summarizing the table to include just the mean of each variable for each activity and each subject
-subjectavgdata <- aggregate(fdnoactlabel[, names(fdnoactlabel) != c('activityId','subjectId')], by=list(activityId=fdnoactlabel$activityId, subjectId = fdnoactlabel$subjectId), mean)
+avgdata <- aggregate(fdnoactlabel[, names(fdnoactlabel) != c('activityId','subjectId')], by=list(activityId=fdnoactlabel$activityId, subjectId = fdnoactlabel$subjectId), mean)
 
 # Merging the subjectavgdata with activity label to include descriptive acitvity names
-subjectavgdata <- merge(subjectavgdata, activity_labels, by='activityId', all.x=TRUE)
+avgdata <- merge(avgdata, activity_labels, by='activityId', all.x=TRUE)
+
+# Sort by activity and subject
+sortavgdata <- arrange(avgdata, activityId, subjectId)
+
+# Re-arrange activity label next to activity ID
+activitydata <- select(sortavgdata, activityId, activityLabel)
+restofdata <- select (sortavgdata, -activityId, -activityLabel)
+subjectavgdata <- cbind(activitydata, restofdata)
 
 # Export the tidyData set 
 write.table(subjectavgdata, './subjectavgdata.csv', row.names=FALSE, sep=',')
